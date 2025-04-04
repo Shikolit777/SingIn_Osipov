@@ -7,6 +7,8 @@
     android:layout_height="match_parent"
     android:background="#FFC107"
     tools:context=".MainActivity">
+<!--    android:layoutAnimation="@transition/anim_left">-->
+
 
     <TextView
         android:id="@+id/name"
@@ -33,17 +35,18 @@
 
     <EditText
         android:id="@+id/login"
-        android:background="@drawable/radius"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="60dp"
+        android:background="@drawable/radius"
         android:hint="ivanov@mail.ru"
+        android:minHeight="48dp"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textLogin"/>
+        app:layout_constraintTop_toBottomOf="@+id/textLogin" />
 
     <TextView
         android:id="@+id/textPassword"
@@ -60,16 +63,17 @@
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/radius"
         android:layout_marginLeft="60dp"
-        android:padding="10dp"
-        android:layout_marginRight="60dp"
         android:layout_marginTop="10dp"
-        android:inputType="textPassword"
+        android:layout_marginRight="60dp"
+        android:background="@drawable/radius"
         android:hint="Asdfg123"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textPassword"/>
+        app:layout_constraintTop_toBottomOf="@+id/textPassword" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bthSingIn"
