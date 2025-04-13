@@ -33,6 +33,7 @@
         android:background="@drawable/radius"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:layout_marginLeft="60dp"
         android:layout_marginRight="60dp"
         android:layout_marginTop="10dp"
@@ -58,6 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/radius"
+        android:textColor="@color/black"
         android:layout_marginLeft="60dp"
         android:padding="10dp"
         android:layout_marginRight="60dp"
@@ -81,6 +83,7 @@
 
     <EditText
         android:id="@+id/repeatPassword"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/radius"
@@ -98,14 +101,15 @@
         android:id="@+id/btnSingIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/radius"
         android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp"
         android:layout_marginTop="50dp"
-        android:text="Sing In"
-        android:textColor="@color/black"
+        android:layout_marginRight="80dp"
+        android:background="@drawable/radius"
+        android:onClick="onRegistration"
+        android:text="Reg In"
         android:textAllCaps="false"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/repeatPassword"/>
+        app:layout_constraintTop_toBottomOf="@+id/repeatPassword" />
 </androidx.constraintlayout.widget.ConstraintLayout>

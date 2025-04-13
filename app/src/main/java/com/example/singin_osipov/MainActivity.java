@@ -20,25 +20,50 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
+    public int start_x = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.singin);
     }
-    public int start_x = 0;
+
     public String login, password;
     public void onAuthorization(View view)
     {
-        TextView tv_login = findViewById(R.id.editTextTextPersonName);
+        TextView tv_login = findViewById(R.id.login);
         login = tv_login.getText().toString();
 
-        TextView tv_password = findViewById(R.id.editTextTextPersonName2);
+        TextView tv_password = findViewById(R.id.password);
         password = tv_password.getText().toString();
 
         GetDataUser gdu = new GetDataUser();
         gdu.execute();
     }
+
+    @Override
+        public boolean onTouchEvent(MotionEvent event)
+        {
+            switch (event.getAction())
+            {
+                case MotionEvent.ACTION_DOWN:
+                    start_x = (int)event.getX();
+                    break;
+                case MotionEvent.ACTION_UP:
+                    if (Math.abs((int)event.getX() - start_x) > 50)
+                    {
+                        if (start_x < (int) event.getX())
+                        {
+                            setContentView(R.layout.singin);
+                        }
+                        else
+                        {
+                            setContentView(R.layout.regin);
+                        }
+                   }
+            }
+           return false;
+        }
+
     public class DataUser {
         public String id;
         public String login;
@@ -64,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             Document doc_b = null;
             try
             {
-                doc_b = Jsoup.connect("https://0pp0site.000webhostapp.com/index.php?login="+login+"&password="+password).get();
+                doc_b = Jsoup.connect("https://192.168.0.107/index.php?login="+login+"&password="+password).get();
             }
             catch (IOException e)
             {
@@ -121,29 +146,48 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+    public void onRegistration(View view)
+    {
+        TextView tv_login = findViewById(R.id.login);
+        TextView tv_password = findViewById(R.id.password);
+        TextView tv_password2 = findViewById(R.id.repeatPassword);
+
+        String a = tv_password.getText().toString();
+        String b = tv_password2.getText().toString();
+        if (a.contains(b))
+        {
+            login = tv_login.getText().toString();
+            password = tv_password.getText().toString();
+
+            SetDataUser sdu = new SetDataUser();
+            sdu.execute();
+        }
+        else
+        {
+            Common.AlertDialog("Авторизация", "Пароли не совпадают",MainActivity.this);
+        }
+    }
+
+    public class SetDataUser extends AsyncTask<Void, Void, Void> {
+        String body;
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            Document doc_b = null;
+            try {
+                doc_b = Jsoup.connect("https://192.168.0.107/index.php?login=" + login + "&password=" + password).get();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if (doc_b != null) {
+                body = doc_b.text();
+            } else {
+                body = "Ошибка!";
+            }
+            return null;
+        }
+    }
 
 }
 
-//@Override
-//    public boolean onTouchEvent(MotionEvent event)
-//    {
-//        switch (event.getAction())
-//        {
-//            case MotionEvent.ACTION_DOWN:
-//                start_x = (int)event.getX();
-//                break;
-//            case MotionEvent.ACTION_UP:
-//                if (Math.abs((int)event.getX() - start_x) > 50)
-//                {
-//                    if (start_x < (int) event.getX())
-//                    {
-//                        setContentView(R.layout.singin);
-//                    }
-//                    else
-//                    {
-//                        setContentView(R.layout.regin);
-//                    }
-//                }
-//        }
-//        return false;
-//    }
