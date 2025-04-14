@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             Document doc_b = null;
             try
             {
-                doc_b = Jsoup.connect("https://192.168.0.107/index.php?login="+login+"&password="+password).get();
+                doc_b = Jsoup.connect("http://192.168.0.105/index.php?login="+login+"&password="+password).get();
             }
             catch (IOException e)
             {
@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
 
         String a = tv_password.getText().toString();
         String b = tv_password2.getText().toString();
-        if (a.contains(b))
+        if (a.equals(b))
         {
             login = tv_login.getText().toString();
             password = tv_password.getText().toString();
@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
         protected Void doInBackground(Void... params) {
             Document doc_b = null;
             try {
-                doc_b = Jsoup.connect("https://192.168.0.107/index.php?login=" + login + "&password=" + password).get();
+                doc_b = Jsoup.connect("http://192.168.0.105/regin.php?login=" + login + "&password=" + password).get();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -187,7 +187,22 @@ public class MainActivity extends AppCompatActivity {
             }
             return null;
         }
-    }
 
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            if(body.length()==0){
+                Common.AlertDialog("Регистрация","Ошибка данных",MainActivity.this);
+                return;
+            }
+            if(body.contains("0")){
+                Common.AlertDialog("Регистрация","Пользователя с таким логином существует",MainActivity.this);
+
+            }else {
+                Common.AlertDialog("Регистрация","Пользователь зарегистрирован",MainActivity.this);
+
+            }
+        }
+    }
 }
 
